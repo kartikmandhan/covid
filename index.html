@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <script src="https://kit.fontawesome.com/8a53302146.js"></script>
+  <link rel="stylesheet" href="jquery-jvectormap-2.0.5.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="images/favicon.ico">
+
+  <title>covid19</title>
+</head>
+
+<body>
+  <!--  =========================================NavBar Section========================================  -->
+  <nav class="navbar navbar-expand-md navbar-dark navbar-new bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Covid19</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav ml-auto  mt-2 mt-lg-0 ">
+        <li class="nav-item active">
+        <li class="nav-item active">
+          <a class="nav-link" href="#mainpage">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <a class="nav-link active" href="#stats" tabindex="-1" aria-disabled="true">Statistics</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link " href="#map" tabindex="-1" aria-disabled="true">Map</a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="#aboutcorona">About Covid19</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link " href="#symptoms" tabindex="-1" aria-disabled="true">Symptoms</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link " href="#prevention" tabindex="-1" aria-disabled="true">Prevention</a>
+        </li>
+
+
+      </ul>
+
+    </div>
+  </nav>
+
+  <!--  =========================================Dashboard Section========================================  -->
+
+
+  <section class="section mt-5" id="mainpage">
+    <div class="dashboard ">
+      <div class="container">
+
+        <div class=" mx-auto text-center">
+          <h1 class="mainpage-text ">Global COVID-19 Dashboard</h1>
+          <h2><span class="mt-5 heading-primary-01">Stay Home.</span>
+            <span class=" heading-primary-01">Be A Hero! </span></h2>
+          <h3 class="heading-primary-02">#WeWillFightCorona</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!--  =========================================Statistics Section========================================  -->
+  <section class="section" id="stats">
+    <div class="container" data-aos="zoom-in-up">
+      <h1 class="text-center mb-5"><b>Browse Cases By Country</b></h1>
+      <h4 class="text-center">(Select country from Category to Display Chart)</h4>
+      <div id="chart-options" class="row">
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="country_select">Category</label>
+            <select class="custom-select shadow-sm" name="country_select" id="country_select">
+              <option value="Global">Global</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="case_type">Case Type</label>
+            <select class="custom-select shadow-sm" name="case_type" id="case_type">
+              <option value="Confirmed">Confirmed</option>
+              <option value="Recovered">Recovered</option>
+              <<option value="Deceased">Deceased</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center" id="btn-container">
+        <button class="btn btn-warning shadow-sm" value="2 Weeks">2&nbsp;Weeks</button>
+        <button class="btn btn-warning shadow-sm active " value="1 Month">1&nbsp;Month</button>
+        <!-- &nbsp; is non breakable space so that two words stay on the same line -->
+        <button class=" btn btn-warning shadow-sm" value="Begining">Begining</button>
+      </div>
+
+
+      <div id="chart_container" class=" shadow container card ">
+        <canvas id="myChart" height="380"></canvas>
+      </div>
+
+      <div class="row mt-2 mt-md-5 justify-content-center" id="info">
+
+        <div class="col-12 col-md-4">
+          <div class="shadow-lg card card-body pl-4" id="conf_card">
+            <p class="card-title ">Confirmed </p>
+            <p class="card-text  total_conf">N/A</p>
+            <p class="small  new_conf">+0</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 ">
+          <div class="shadow-lg card card-body pl-4" id="reco_card">
+            <p class="card-title ">Recovered</p>
+            <p class="card-text  total_reco">N/A</p>
+            <p class="small  new_reco">+0</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-12">
+          <div class="shadow-lg card card-body pl-4 " id="dece_card">
+            <p class="card-title ">Deceased</p>
+            <p class="card-text  total_dead">N/A</p>
+            <p class="small  new_dead">+0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--  =========================================Map Section========================================  -->
+
+  <section id="map">
+    <div class="container" data-aos="zoom-in-up">
+      <h1 class="text-center my-5"><b>Browse Cases through Map</b></h1>
+      <h4><b>Top 9 Countries</b></h4>
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="table-responsive">
+            <table class="table table-hover border-bottom border-secondary">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Country</th>
+                  <th>Cases</th>
+                  <th>Recovered</th>
+                  <th>Deceased</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 ">
+          <div id="world-map" class=" img-fluid "></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--  =========================================About Corona Section ========================================  -->
+
+  <section class="section" id="aboutcorona">
+    <div class="container " data-aos="zoom-in-up">
+
+      <div class="text-center mt-5 my-0">
+        <h1><b>What is Corona Virus aka COVID-19?</b></h1>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-6 py-4 align-self-center d-flex justify-content-center">
+          <img src="images/virus.svg" alt="">
+        </div>
+        <div class="col-lg-5 align-self-center d-flex justify-content-center">
+          <div>
+            <p>
+              The coronavirus is a family of viruses that can cause a range of
+              illnesses in humans including common cold and more severe forms
+              like SARS and MERS which are life-threatening. The virus is named
+              after its shape which takes the form of a crown with protrusions
+              around it and hence is known as coronavirus.
+            </p>
+            <p>
+              The recent outbreak of coronavirus is believed to have occurred in
+              a market for illegal wildlife in the central Chinese city of
+              Wuhan. Chinese health authorities and the WHO are investigating
+              the outbreak of the recent coronavirus.
+            </p>
+            <p>
+              Since it's a new strain, there is no specific vaccine that can
+              treat it. However, many countries are in process of developing it,
+              while some have started trial on Humans too .According to the WHO,
+              many of the symptoms canbe treated & therefore treatment based on
+              the patient’s clinical condition.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--  =========================================Symptoms Section ========================================  -->
+
+  <section class="section" id="symptoms">
+    <div class="container " data-aos="zoom-in-up">
+      <h1 class="text-center my-5"><b>Symptoms</b></h1>
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-6">
+          <div class="card">
+            <img class="img-top img-fluid" src="images/symptoms/Fever.svg" alt="Fever">
+            <div class="card-body">
+              <p class="card-text">High Fever</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6">
+          <div class="card">
+            <img class="img-top img-fluid" src="images/symptoms/vommiting.svg" alt="Frequent Vommiting">
+            <div class="card-body">
+              <p class="card-text">Frequent Vommiting</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6">
+          <div class="card">
+            <img class="img-top img-fluid" src="images/symptoms/breathing_problem.svg" alt="Breathing Problem">
+            <div class="card-body">
+              <p class="card-text">Breathing Problem</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6">
+          <div class="card">
+            <img class="img-top img-fluid" src="images/symptoms/sore_throat.svg" alt="Sore Throat">
+            <div class="card-body">
+              <p class="card-text">Sore Throat</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-6">
+          <div class="card">
+            <img class="img-top img-fluid" src="images/symptoms/running_nose.svg" alt="Running Nose">
+            <div class="card-body">
+              <p class="card-text">Running Nose</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6">
+          <div class="card">
+            <img class="img-top img-fluid" src="images/symptoms/body_pain.svg" alt="Body Pain">
+            <div class="card-body">
+              <p class="card-text">Body Pain</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6">
+          <div class="card">
+            <img class="img-top img-fluid" src="images/symptoms/tiredness.svg" alt="Tiredness">
+            <div class="card-body">
+              <p class="card-text">Tiredness</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6">
+          <div class="card">
+            <img class="img-top img-fluid" src="images/symptoms/coughing.svg" alt="Cough">
+            <div class="card-body">
+              <p class="card-text">Cough</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!--  =========================================Prevention Section========================================  -->
+
+  <section id="prevention">
+    <div class="container" data-aos="zoom-in-up">
+      <div class="text-center py-4 title">
+        <h1><b>Prevention Tips</b></h1>
+      </div>
+
+
+      <div class="row mt-5">
+        <div class="col-md-3 col-sm-6 col-6 d-flex align-items-stretch">
+          <!-- d-flex align-items-stretch casses are added to make allthe cards of same size -->
+          <div class="card ">
+            <img class="card-img-top img-fluid" src="./images/prevention/wash_hands.svg" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Washing Hands Regulary</h4>
+              <p class="card-text">Wash hands regularly with anti-bacterial hand wash or soap will protect
+                and prevent any further spreading from contact.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6 d-flex align-items-stretch">
+          <div class="card ">
+            <img class="card-img-top img-fluid" src="./images/prevention/wear_mask.svg" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Wearing a Mask</h4>
+              <p class="card-text">Wear a mask whenever going out for emergency reasons and confronting
+                people</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6 d-flex align-items-stretch">
+
+          <div class="card ">
+            <img class="card-img-top img-fluid" src="./images/prevention/sanitize.svg" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Sanitize your house</h4>
+              <p class="card-text">Sanitize the things which are always in touch of various people with a
+                proper disinfectant.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-6 d-flex align-items-stretch">
+          <div class="card ">
+            <img class="card-img-top img-fluid" src="./images/prevention/social_distancing.svg" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Social distancing is the weapon!</h4>
+              <p class="card-text">Practice social disatncing always and also make others aware of it
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!--  =========================================End of all sections========================================  -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.js"></script> -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+  <script src="jquery-jvectormap-2.0.5.min.js"></script>
+  <!--- World Map SVG Path Info file in jVectorMap supported format-->
+  <script src="jquery-jvectormap-world-merc.js"></script>
+  <script src="index.js"></script>
+</body>
+<!--  =========================================footer========================================  -->
+
+<footer>
+  <div class="container">
+
+    <ul class="social justify-content-center">
+      <li><a href="mailto:kartikmandhan14@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+      <li><a href="https://www.linkedin.com/in/kartik-mandhan-13aa4b192/"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+      <li><a href="https://www.instagram.com/kartikmandhan/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+    </ul>
+    <div class="para">
+      <span>Made with
+        <i class="fas fa-hand-holding-heart text-danger" aria-hidden="true"></i> by Kartik Mandhan</span>
+    </div>
+  </div>
+</footer>
+
+</html>
