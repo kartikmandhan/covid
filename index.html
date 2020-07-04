@@ -71,12 +71,12 @@
   <!--  =========================================Statistics Section========================================  -->
   <section class="section" id="stats">
     <div class="container" data-aos="zoom-in-up">
-      <h1 class="text-center mb-5"><b>Browse Cases By Country</b></h1>
+      <h1 class="text-center "><b>Browse Cases By Country</b></h1>
       <h4 class="text-center">(Select country from Category to Display Chart)</h4>
       <div id="chart-options" class="row">
         <div class="col-sm-5">
           <div class="form-group">
-            <label for="country_select">Category</label>
+            <label class="text-left" for="country_select">Category</label>
             <select class="custom-select shadow-sm" name="country_select" id="country_select">
               <option value="Global">Global</option>
             </select>
@@ -105,23 +105,30 @@
         <canvas id="myChart" height="380"></canvas>
       </div>
 
-      <div class="row mt-2 mt-md-5 justify-content-center" id="info">
+      <div class="row mt-2 mt-md-4 justify-content-center" id="info">
 
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-3">
           <div class="shadow-lg card card-body pl-4" id="conf_card">
             <p class="card-title ">Confirmed </p>
             <p class="card-text  total_conf">N/A</p>
             <p class="small  new_conf">+0</p>
           </div>
         </div>
-        <div class="col-12 col-md-4 ">
+        <div class="col-12 col-md-3">
+          <div class="shadow-lg card card-body pl-4" id="act_card">
+            <p class="card-title ">Active </p>
+            <p class="card-text  total_act">N/A</p>
+            <p class="small  new_act">+0</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-3 ">
           <div class="shadow-lg card card-body pl-4" id="reco_card">
             <p class="card-title ">Recovered</p>
             <p class="card-text  total_reco">N/A</p>
             <p class="small  new_reco">+0</p>
           </div>
         </div>
-        <div class="col-md-4 col-12">
+        <div class="col-md-3 col-12">
           <div class="shadow-lg card card-body pl-4 " id="dece_card">
             <p class="card-title ">Deceased</p>
             <p class="card-text  total_dead">N/A</p>
@@ -135,17 +142,18 @@
 
   <section id="map">
     <div class="container" data-aos="zoom-in-up">
-      <h1 class="text-center my-5"><b>Browse Cases through Map</b></h1>
+      <h1 class="text-center mt-5"><b>Browse Cases through Map</b></h1>
       <h4><b>Top 9 Countries</b></h4>
       <div class="row">
         <div class="col-md-6">
 
           <div class="table-responsive">
-            <table class="table table-hover border-bottom border-secondary">
+            <table id="world_table" class="table table-hover border-bottom border-secondary">
               <thead class="thead-dark">
                 <tr>
                   <th>Country</th>
-                  <th>Cases</th>
+                  <th>Confirmed</th>
+                  <th>Active</th>
                   <th>Recovered</th>
                   <th>Deceased</th>
                 </tr>
@@ -157,6 +165,35 @@
         </div>
         <div class="col-md-6 ">
           <div id="world-map" class=" img-fluid "></div>
+        </div>
+      </div>
+    </div>
+      <hr>
+    <div class="container" data-aos="zoom-in-up">
+
+      <h1 class="text-center"><b>India</b></h1>
+      <h4><b>Browse Cases by States</b></h4>
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="table-responsive">
+            <table id="india_table"class="table table-fixed table-hover border-bottom border-secondary">
+              <thead class="thead-dark">
+                <tr>
+                  <th>State</th>
+                  <th>Confirmed</th>
+                  <th>Active</th>
+                  <th>Recovered</th>
+                  <th>Deceased</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 ">
+          <div id="india-map" class=" img-fluid "></div>
         </div>
       </div>
     </div>
@@ -337,13 +374,15 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.js"></script> -->
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
   <script src="jquery-jvectormap-2.0.5.min.js"></script>
-  <!--- World Map SVG Path Info file in jVectorMap supported format-->
-  <script src="jquery-jvectormap-world-merc.js"></script>
+  <!---  Map SVG Path Info file in jVectorMap supported format-->
+  <script src="jquery-jvectormap-world-mill.js"></script>
+  <script src="jquery-jvectormap-in-mill.js"></script>
+
+  <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
   <script src="index.js"></script>
 </body>
 <!--  =========================================footer========================================  -->

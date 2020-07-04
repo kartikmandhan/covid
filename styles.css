@@ -224,7 +224,11 @@
   color: #d92027;
   font-size: 1.5rem;
 }
-
+#stats #act_card {
+  background-color: #40bad5;
+  color: #120136;
+  font-size: 1.5rem;
+}
 #stats #reco_card {
   background-color: #a2de96;
   color: #184d47;
@@ -238,9 +242,20 @@
 }
 
 /* =========================================Map Section======================================== */
-#map #world-map {
-  width: 800px;
+#map #world-map,#india-map {
+  width: 540px;
   height: 500px;
+}
+#map .table-responsive{
+height: 500px;
+}
+hr {
+  border-style: none;
+  border-top-style: dotted;
+  border-width: 5px;
+  border-color: grey;
+  width: 6%;
+  margin-top: 2rem;
 }
 
 /* =========================================Footer Section======================================== */
@@ -279,3 +294,23 @@ footer .social li {
 .fa-instagram:hover {
   color: #a45174;
 }
+/*
+ *                       _oo0oo_
+ *                      o8888888o
+ *                      88" . "88
+ *                      (| -_- |)
+ *                      0\  =  /0
+ *                    ___/`---'\___
+ *                  .' \|     |// '.
+ *                 / \|||  :  |||// \
+ *                / _||||| -:- |||||- \
+ *               |   | \  -  /// |   |
+ *               | \_|  ''\---/''  |_/ |
+ *               \  .-\__  '-'  ___/-. /
+ *             ___'. .'  /--.--\  `. .'___
+ *          ."" '<  `.___\_<|>_/___.' >' "".
+ *         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *         \  \ `_.   \_ __\ /__ _/   .-` /  /
+ *     =====`-.____`.___ \_____/___.-`___.-'=====
+ *                       `=---='
+ * */
