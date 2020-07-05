@@ -1,10 +1,11 @@
 //jshint esversion:6
 AOS.init();
 //global variables
-const covidMapDataWorld = {},covidMapDataIndia = {};
+const covidMapDataWorld = {},
+  covidMapDataIndia = {};
 
 window.onscroll = function() {
-  let navbar =$(".navbar");
+  let navbar = $(".navbar");
   if (document.documentElement.scrollTop >= 450) {
     navbar.removeClass("bg-dark");
   } else {
@@ -32,6 +33,7 @@ function resetCanvas() {
   $('#myChart').remove(); // this is my <canvas> element
   $('#chart_container').append('<canvas id="myChart" height="380"></canvas>');
 }
+
 function chart(dates, confirmed, recovered, deaths, typeOfCase) {
   //this function is called thrice ,twice inside fetchChartData,
   // 1.when we initially change only country 2.when we change selectboxcasetype
@@ -193,7 +195,7 @@ function updateCardsAndChart(data, selectBoxCountry) {
   let tDeceased = $(".total_dead")[0];
   tDeceased.innerText = dataArrayName.TotalDeaths;
   let tActive = $(".total_act")[0];
-  tActive.innerText=dataArrayName.TotalConfirmed-dataArrayName.TotalRecovered-dataArrayName.TotalDeaths;
+  tActive.innerText = dataArrayName.TotalConfirmed - dataArrayName.TotalRecovered - dataArrayName.TotalDeaths;
 
   let nConfirmed = $(".new_conf")[0];
   nConfirmed.innerText = "+" + dataArrayName.NewConfirmed;
@@ -202,7 +204,7 @@ function updateCardsAndChart(data, selectBoxCountry) {
   let nDeceased = $(".new_dead")[0];
   nDeceased.innerText = "+" + dataArrayName.NewDeaths;
   let nActive = $(".new_act")[0];
-  nActive.innerText=dataArrayName.NewConfirmed-dataArrayName.NewRecovered-dataArrayName.NewDeaths;
+  nActive.innerText = dataArrayName.NewConfirmed - dataArrayName.NewRecovered - dataArrayName.NewDeaths;
 
 
 }
@@ -223,7 +225,11 @@ fetch("https://api.covid19api.com/summary", requestOptions)
     // console.log(top9);
 
     dataJSON.Countries.forEach(function(country) {
-      covidMapDataWorld[country.CountryCode] ={c:country.TotalConfirmed,r:country.TotalRecovered,d:country.TotalDeaths};
+      covidMapDataWorld[country.CountryCode] = {
+        c: country.TotalConfirmed,
+        r: country.TotalRecovered,
+        d: country.TotalDeaths
+      };
 
     });
     // console.log(covidMapDataWorld);
@@ -240,39 +246,44 @@ fetch("https://api.covid19api.com/summary", requestOptions)
   });
 
 function initialiseTableWorld(top9) {
-  let tableRow,active;
+  let tableRow, active;
   top9.forEach(function(country) {
-    active=country.TotalConfirmed-country.TotalRecovered-country.TotalDeaths
+    active = country.TotalConfirmed - country.TotalRecovered - country.TotalDeaths;
     tableRow = "<tr><td>" + country.Country + "</td>" + "<td>" + country.TotalConfirmed + "</td>" + "<td>" + active + "</td>" + "<td>" + country.TotalRecovered + "</td>" + "<td>" + country.TotalDeaths + "</td></tr>";
     $("#world_table").find("tbody").append(tableRow);
   });
   // $(table).find('tbody').append("<tr><td>"+country.Country+"</td></tr>");
 }
 
-function initialiseTableIndia(sortedStates){
+function initialiseTableIndia(sortedStates) {
   let tableRow;
   sortedStates.forEach(function(state) {
-    if(state.state==="State Unassigned"){
+    if (state.state === "State Unassigned") {
       return;
       //alterntive to continue,in forEach loop
     }
-    tableRow = "<tr><td>" + state.state + "</td>" + "<td>" + state.confirmed + "</td>"+ "<td>" + state.active + "</td>" + "<td>" + state.recovered + "</td>" + "<td>" + state.deaths + "</td></tr>";
+    tableRow = "<tr><td>" + state.state + "</td>" + "<td>" + state.confirmed + "</td>" + "<td>" + state.active + "</td>" + "<td>" + state.recovered + "</td>" + "<td>" + state.deaths + "</td></tr>";
     $("#india_table").find("tbody").append(tableRow);
   });
 }
 //Fetching India's Data
 fetch("https://api.covid19india.org/data.json", requestOptions)
   .then(response => response.text())
-  .then(function(result){
-    result=JSON.parse(result);
-    const states=result.statewise;
+  .then(function(result) {
+    result = JSON.parse(result);
+    const states = result.statewise;
     // console.log(states);
-    const sortedStates=states.sort(function(a, b) {
+    const sortedStates = states.sort(function(a, b) {
       return b.confirmed - a.confirmed;
     });
     //fetching data for maps in the form of statecode: cases
     states.forEach(function(state) {
-      covidMapDataIndia["IN-"+state.statecode] = {c:state.confirmed,r:state.recovered,d:state.deaths,a:state.active};
+      covidMapDataIndia["IN-" + state.statecode] = {
+        c: state.confirmed,
+        r: state.recovered,
+        d: state.deaths,
+        a: state.active
+      };
     });
     //sliced by 1,since first element is total cases inside statewise array
     initialiseTableIndia(sortedStates.slice(1));
@@ -283,38 +294,38 @@ fetch("https://api.covid19india.org/data.json", requestOptions)
   });
 
 
-  $(function() {
+$(function() {
 
-    const mapConfig = {
-      map: 'world_mill', //world_merc is name of file containing the map
+  const mapConfig = {
+    map: 'world_mill', //world_merc is name of file containing the map
 
-        zoomOnScroll:false,
-      regionStyle: {
-        initial: {
-          fill: '#B8E186'
-        },
-        selected: {
-          fill: "#3ca59d",
-        },
+    zoomOnScroll: false,
+    regionStyle: {
+      initial: {
+        fill: '#B8E186'
       },
-      regionsSelectable: true,
-      regionsSelectableOne: true,
-      title: "Covid-19 Confirmed Cases",
-      backgroundColor: "#232A32",
-      onRegionTipShow: function(e, el, code) {
-        let data=covidMapDataWorld[code];
-        let active=data.c-data.r-data.d;
-        let displayString="Confirmed: "+data.c+"<br>"+"Active: "+active+"<br>"+"Recovered: "+data.r+"<br>"+"Deceased: "+data.d;
-          el.html(el.html() + ' - ' + displayString);
-      }
-    };
-    $('#world-map').vectorMap(mapConfig);
-    mapConfig.map='in_mill';
-    mapConfig.onRegionTipShow= function(e, el, code) {
-      let data=covidMapDataIndia[code];
-      let displayString="Confirmed: "+data.c+"<br>"+"Active: "+data.a+"<br>"+"Recovered: "+data.r+"<br>"+"Deceased: "+data.d;
-        el.html(el.html() + ' - ' + displayString);
-      };
+      selected: {
+        fill: "#3ca59d",
+      },
+    },
+    regionsSelectable: true,
+    regionsSelectableOne: true,
+    title: "Covid-19 Confirmed Cases",
+    backgroundColor: "#232A32",
+    onRegionTipShow: function(e, el, code) {
+      let data = covidMapDataWorld[code];
+      let active = data.c - data.r - data.d;
+      let displayString = "Confirmed: " + data.c + "<br>" + "Active: " + active + "<br>" + "Recovered: " + data.r + "<br>" + "Deceased: " + data.d;
+      el.html(el.html() + ' - ' + displayString);
+    }
+  };
+  $('#world-map').vectorMap(mapConfig);
+  mapConfig.map = 'in_mill';
+  mapConfig.onRegionTipShow = function(e, el, code) {
+    let data = covidMapDataIndia[code];
+    let displayString = "Confirmed: " + data.c + "<br>" + "Active: " + data.a + "<br>" + "Recovered: " + data.r + "<br>" + "Deceased: " + data.d;
+    el.html(el.html() + ' - ' + displayString);
+  };
 
-    $('#india-map').vectorMap(mapConfig);
-  });
+  $('#india-map').vectorMap(mapConfig);
+});

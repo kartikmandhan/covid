@@ -135,6 +135,66 @@
   animation-name: moveInRight;
   animation-duration: 2s;
 }
+/* =========================================Stats Section======================================== */
+#stats {
+  background-color: #B7EFCD;
+}
+
+#stats .btn-warning {
+  background-color: #FEF2D3;
+  color: #fd7e14;
+  border-radius: 0;
+}
+
+#stats .btn-warning:hover {
+  border-color: #feaf14;
+}
+#stats .card-body{
+  font-size: 1.5rem;
+}
+
+#stats .btn-warning.active {
+  background-color: #FBD879;
+}
+
+#stats #conf_card {
+  background-color: #ffa5b0;
+  color: #d92027;
+
+}
+#stats #act_card {
+  background-color: #40bad5;
+  color: #120136;
+
+}
+#stats #reco_card {
+  background-color: #a2de96;
+  color: #184d47;
+
+}
+
+#stats #dece_card {
+  background-color: #f0f0f0;
+  color: #323232;
+
+}
+
+/* =========================================Map Section======================================== */
+#map #world-map,#india-map {
+  width: 540px;
+  height: 500px;
+}
+#map .table-responsive{
+height: 500px;
+}
+hr {
+  border-style: none;
+  border-top-style: dotted;
+  border-width: 5px;
+  border-color: grey;
+  width: 6%;
+  margin-top: 2rem;
+}
 
 /* ============================-------------------about corona section-----------------------================ */
 #aboutcorona {
@@ -200,63 +260,6 @@
   box-shadow: 0px 0px 9px 4px #eee;
 }
 
-/* =========================================Stats Section======================================== */
-#stats {
-  background-color: #B7EFCD;
-}
-
-#stats .btn-warning {
-  background-color: #FEF2D3;
-  color: #fd7e14;
-  border-radius: 0;
-}
-
-#stats .btn-warning:hover {
-  border-color: #feaf14;
-}
-
-#stats .btn-warning.active {
-  background-color: #FBD879;
-}
-
-#stats #conf_card {
-  background-color: #ffa5b0;
-  color: #d92027;
-  font-size: 1.5rem;
-}
-#stats #act_card {
-  background-color: #40bad5;
-  color: #120136;
-  font-size: 1.5rem;
-}
-#stats #reco_card {
-  background-color: #a2de96;
-  color: #184d47;
-  font-size: 1.5rem;
-}
-
-#stats #dece_card {
-  background-color: #f0f0f0;
-  color: #323232;
-  font-size: 1.5rem;
-}
-
-/* =========================================Map Section======================================== */
-#map #world-map,#india-map {
-  width: 540px;
-  height: 500px;
-}
-#map .table-responsive{
-height: 500px;
-}
-hr {
-  border-style: none;
-  border-top-style: dotted;
-  border-width: 5px;
-  border-color: grey;
-  width: 6%;
-  margin-top: 2rem;
-}
 
 /* =========================================Footer Section======================================== */
 footer {
