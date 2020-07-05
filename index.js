@@ -187,24 +187,24 @@ function updateCardsAndChart(data, selectBoxCountry) {
     dataArrayName = data.Countries[selectBoxCountry.selectedIndex - 1];
     fetchChartData(countrySelected);
   }
-
+// toLocaleString() adds commas in digits.
   let tConfirmed = $(".total_conf")[0];
-  tConfirmed.innerText = dataArrayName.TotalConfirmed;
+  tConfirmed.innerText = dataArrayName.TotalConfirmed.toLocaleString();
   let tRecovered = $(".total_reco")[0];
-  tRecovered.innerText = dataArrayName.TotalRecovered;
+  tRecovered.innerText = dataArrayName.TotalRecovered.toLocaleString();
   let tDeceased = $(".total_dead")[0];
-  tDeceased.innerText = dataArrayName.TotalDeaths;
+  tDeceased.innerText = dataArrayName.TotalDeaths.toLocaleString();
   let tActive = $(".total_act")[0];
-  tActive.innerText = dataArrayName.TotalConfirmed - dataArrayName.TotalRecovered - dataArrayName.TotalDeaths;
+  tActive.innerText = (dataArrayName.TotalConfirmed - dataArrayName.TotalRecovered - dataArrayName.TotalDeaths).toLocaleString();
 
   let nConfirmed = $(".new_conf")[0];
-  nConfirmed.innerText = "+" + dataArrayName.NewConfirmed;
+  nConfirmed.innerText = "+" + dataArrayName.NewConfirmed.toLocaleString();
   let nRecovered = $(".new_reco")[0];
-  nRecovered.innerText = "+" + dataArrayName.NewRecovered;
+  nRecovered.innerText = "+" + dataArrayName.NewRecovered.toLocaleString();
   let nDeceased = $(".new_dead")[0];
-  nDeceased.innerText = "+" + dataArrayName.NewDeaths;
+  nDeceased.innerText = "+" + dataArrayName.NewDeaths.toLocaleString();
   let nActive = $(".new_act")[0];
-  nActive.innerText = dataArrayName.NewConfirmed - dataArrayName.NewRecovered - dataArrayName.NewDeaths;
+  nActive.innerText = (dataArrayName.NewConfirmed - dataArrayName.NewRecovered - dataArrayName.NewDeaths).toLocaleString();
 
 
 }
@@ -249,7 +249,7 @@ function initialiseTableWorld(top9) {
   let tableRow, active;
   top9.forEach(function(country) {
     active = country.TotalConfirmed - country.TotalRecovered - country.TotalDeaths;
-    tableRow = "<tr><td>" + country.Country + "</td>" + "<td>" + country.TotalConfirmed + "</td>" + "<td>" + active + "</td>" + "<td>" + country.TotalRecovered + "</td>" + "<td>" + country.TotalDeaths + "</td></tr>";
+    tableRow = "<tr><td>" + country.Country + "</td>" + "<td>" + country.TotalConfirmed.toLocaleString() + "</td>" + "<td>" + active.toLocaleString() + "</td>" + "<td>" + country.TotalRecovered.toLocaleString() + "</td>" + "<td>" + country.TotalDeaths.toLocaleString() + "</td></tr>";
     $("#world_table").find("tbody").append(tableRow);
   });
   // $(table).find('tbody').append("<tr><td>"+country.Country+"</td></tr>");
@@ -262,7 +262,7 @@ function initialiseTableIndia(sortedStates) {
       return;
       //alterntive to continue,in forEach loop
     }
-    tableRow = "<tr><td>" + state.state + "</td>" + "<td>" + state.confirmed + "</td>" + "<td>" + state.active + "</td>" + "<td>" + state.recovered + "</td>" + "<td>" + state.deaths + "</td></tr>";
+    tableRow = "<tr><td>" + state.state + "</td>" + "<td>" + parseInt(state.confirmed).toLocaleString() + "</td>" + "<td>" + parseInt(state.active).toLocaleString() + "</td>" + "<td>" + parseInt(state.recovered).toLocaleString() + "</td>" + "<td>" + parseInt(state.deaths).toLocaleString() + "</td></tr>";
     $("#india_table").find("tbody").append(tableRow);
   });
 }
@@ -315,7 +315,7 @@ $(function() {
     onRegionTipShow: function(e, el, code) {
       let data = covidMapDataWorld[code];
       let active = data.c - data.r - data.d;
-      let displayString = "Confirmed: " + data.c + "<br>" + "Active: " + active + "<br>" + "Recovered: " + data.r + "<br>" + "Deceased: " + data.d;
+      let displayString = "Confirmed: " + data.c.toLocaleString() + "<br>" + "Active: " + active.toLocaleString() + "<br>" + "Recovered: " + data.r.toLocaleString() + "<br>" + "Deceased: " + data.d.toLocaleString();
       el.html(el.html() + ' - ' + displayString);
     }
   };
@@ -323,7 +323,7 @@ $(function() {
   mapConfig.map = 'in_mill';
   mapConfig.onRegionTipShow = function(e, el, code) {
     let data = covidMapDataIndia[code];
-    let displayString = "Confirmed: " + data.c + "<br>" + "Active: " + data.a + "<br>" + "Recovered: " + data.r + "<br>" + "Deceased: " + data.d;
+    let displayString = "Confirmed: " + parseInt(data.c).toLocaleString() + "<br>" + "Active: " + parseInt(data.a).toLocaleString() + "<br>" + "Recovered: " + parseInt(data.r).toLocaleString() + "<br>" + "Deceased: " + parseInt(data.d).toLocaleString();
     el.html(el.html() + ' - ' + displayString);
   };
 
